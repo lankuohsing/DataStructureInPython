@@ -64,7 +64,7 @@ def create_huffman_tree(leaves):
 
 
 # Huffman编码，得到{char:code}字典
-def huffman_encoding(leaves, root):
+def huffman_encoding(leaves, root,char_frequency):
     char_to_code={}
     for char,frequency in char_frequency:
         char_to_code[char]=""
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     char_frequency = count_frequency(text)#[(char,freq)]
     leaves = create_leaves([item[1] for item in char_frequency])
     root = create_huffman_tree(leaves)
-    char_to_code = huffman_encoding(leaves, root)
+    char_to_code = huffman_encoding(leaves, root,char_frequency)
     huffman_str = encode_str(text, char_to_code)
     origin_str = decode_str(huffman_str, char_to_code)
 
