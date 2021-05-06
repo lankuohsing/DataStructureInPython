@@ -4,7 +4,8 @@ Created on Fri Apr 30 23:11:27 2021
 
 @author: lankuohsing
 """
-
+import time
+# In[]
 class BinTreeNode:
     def __init__(self, data, left=None, right=None):
         self.data=data
@@ -23,10 +24,8 @@ def pre_order_recursive(node: BinTreeNode):
     if node is None:
         return
     print(node.data)
-    temp=node.left
-    pre_order_recursive(temp)
-    temp=node.right
-    pre_order_recursive(temp)
+    pre_order_recursive(node.left)
+    pre_order_recursive(node.right)
     return
 """
 非递归方式前序遍历
@@ -43,8 +42,65 @@ def pre_order_no_recursive(node: BinTreeNode):
             print(node.data)
             nodes_stack.append(node)
             node=node.left
+    return
 
+"""
+递归方式中序遍历
+"""
+def in_order_recursive(node: BinTreeNode):
+    if node is None:
+        return
+    in_order_recursive(node.left)
+    print(node.data)
+    in_order_recursive(node.right)
+    return
+"""
+非递归方式中序遍历
+"""
+def in_order_no_recursive(node: BinTreeNode):
+    stack=[]
+    while True:
+        if node is None:
+            if len(stack)==0:
+                break
+            else:
+                node = stack.pop()
+                print(node.data)
+                node=node.right
+        else:
+            stack.append(node)
+            node=node.left
+    return
 
+"""
+递归方式后序遍历
+"""
+def post_order_recursive(node: BinTreeNode):
+    if node is None:
+        return
+    post_order_recursive(node.left)
+    post_order_recursive(node.right)
+    print(node.data)
+    return
+
+"""
+非递归方式后序遍历
+"""
+def post_order_no_recursive(node: BinTreeNode):
+    if node is None:
+        return
+    stack=[node]
+    result=[]
+    while len(stack)>0:
+        node=stack.pop()
+        result.append(node)
+        if node.left is not None:
+            stack.append(node.left)
+        if node.right is not None:
+            stack.append(node.right)
+    while len(result)>0:
+        print(result.pop().data)
+    return
 # In[]
 """
               node1
@@ -65,6 +121,13 @@ if __name__ == '__main__':
     pre_order_recursive(node1)
     print("非递归方式前序遍历：")
     pre_order_no_recursive(node1)
-
+    print("递归方式中序遍历：")
+    in_order_recursive(node1)
+    print("非递归方式中序遍历：")
+    in_order_no_recursive(node1)
+    print("递归方式后序遍历：")
+    post_order_recursive(node1)
+    print("非递归方式后序遍历：")
+    post_order_no_recursive(node1)
 
 
