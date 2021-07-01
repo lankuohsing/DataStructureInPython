@@ -15,22 +15,20 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-count=0
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         if l1 is None:
             return l2
         if l2 is None:
             return l1
-        start=ListNode()
-        cur=None
+        start=None
         if l2.val <= l1.val:
             cur=l2
             l2=l2.next
         else:
             cur=l1
             l1=l1.next
-        start.next=cur
+        start=cur
         while l1 is not None and l2 is not None:
             if l2.val <= l1.val:
                 cur.next=l2
@@ -41,12 +39,9 @@ class Solution:
             cur=cur.next
         if l1 is not None:
             cur.next=l1
-            #l1=l1.next
         else:
             cur.next=l2
-            #l2=l2.next
-
-        return start.next
+        return start
 
 if __name__ == '__main__':
     node1=ListNode(val=1)
