@@ -4,7 +4,6 @@ Created on Fri Apr 30 23:11:27 2021
 
 @author: lankuohsing
 """
-import time
 # In[]
 class BinTreeNode:
     def __init__(self, data, left=None, right=None):
