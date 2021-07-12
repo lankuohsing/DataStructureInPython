@@ -5,11 +5,11 @@ Created on Mon Jul 12 22:08:14 2021
 @author: lankuohsing
 """
 
- Definition for singly-linked list.
- class ListNode:
-     def __init__(self, val=0, next=None):
-         self.val = val
-         self.next = next
+#Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 class Solution:
     def removeElements(self, head: ListNode, val: int) -> ListNode:
         if head is None:
