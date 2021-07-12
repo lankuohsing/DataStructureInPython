@@ -25,8 +25,18 @@ def golomb_encode(x,m):
         bi=a.format(remainder+div)
     final=first+"0"+str(bi)
     return final
+def golomb_decode(golocode,m):
+    q=0
+    for c in golocode:
+        if c=='0':
+            break
+        else:
+            q+=1
+    r=int(golocode[q+1:],2)
+    return q*m+r
 if __name__=="__main__":
     m=16
     v=18
     golomb_encode_result=golomb_encode(v,m)
     print("golomb encoding result for ",v," with parameter m equals ",m," is ", golomb_encode_result)
+    print("original value: ",golomb_decode(golomb_encode_result,m))
