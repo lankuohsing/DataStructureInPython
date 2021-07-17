@@ -98,18 +98,51 @@ def decode_func(encoded_list, code_to_char):
         ret.append(code_to_char[code])
 
     return ret
+def decode_func_str(encoded_str, char_to_code):
+    min_len=1000000
+    max_len=0
+    for key,value in char_to_code.items():
+        if len(value)<min_len:
+            min_len=len(value)
+        if len(value)>max_len:
+            max_len=len(value)
+    ret=[]
+    start=0
+    end=start+min_len
+    while start<len(encoded_str):
+        is_break=False
+        while end<=len(encoded_str):
+            if end-start>max_len:
+                raise Exception("exception! end-start>max_len")
+            for key,value in char_to_code.items():
+                if encoded_str[start:end]==value:
+                    ret.append(key)
+                    start=end
+                    end=start+min_len
+                    is_break=True
+                    break
+            if is_break:
+                break
+            else:
+                end+=1
+    return ret
 
 # In[]
 if __name__ == '__main__':
 #    ori_list = input('The ori_list to encode:')
     ori_list=["A","F","T","E","R","D","D","A","T","A","E","A","R","A","R","E","A","R","T","A","R","E","A"]
+    ori_list=[-120,-16,-5,-3,-2,-1,-1,0,0,0,1,1,2,3,5,16,120]
     char_frequency = count_frequency(ori_list)#[(char,freq)]
     leaves = create_leaves([item[1] for item in char_frequency])
     root = create_huffman_tree(leaves)
     char_to_code,code_to_char = huffman_encoding(leaves, root,char_frequency)
     encoded_list = encode_func(ori_list, char_to_code)
 
-    decoded_list = decode_func(encoded_list, code_to_char)
+#    decoded_list = decode_func(encoded_list, code_to_char)
+    encoded_str=""
+    for s in encoded_list:
+        encoded_str+=s
+    decoded_result=decode_func_str(encoded_str,char_to_code)
 
     print('Encode result:', encoded_list,"length: ",len(encoded_list))
-    print('Decode result:' , decoded_list)
+    print('Decode result:' , decoded_result)
