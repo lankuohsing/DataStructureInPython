@@ -105,7 +105,7 @@ def decode_str(huffman_str, char_to_code):
 # In[]
 if __name__ == '__main__':
 #    text = input('The text to encode:')
-    text="AFTERDDATAEARAREARTAREA"
+    text="aabccccd"
     char_frequency = count_frequency(text)#[(char,freq)]
     leaves = create_leaves([item[1] for item in char_frequency])
     root = create_huffman_tree(leaves)
