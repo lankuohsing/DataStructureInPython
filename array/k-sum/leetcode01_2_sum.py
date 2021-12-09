@@ -14,3 +14,4 @@ class Solution:
             temp=target-nums[i]
             if temp in num_index.keys() and i!=num_index[temp]:
                 return [i,num_index[temp]]
+        return []
