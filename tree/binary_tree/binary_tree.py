@@ -86,19 +86,27 @@ def post_order_recursive(node: BinTreeNode):
 非递归方式后序遍历
 """
 def post_order_no_recursive(node: BinTreeNode):
-    if node is None:
-        return
-    stack=[node]
-    result=[]
-    while len(stack)>0:
-        node=stack.pop()
-        result.append(node)
-        if node.left is not None:
-            stack.append(node.left)
-        if node.right is not None:
-            stack.append(node.right)
-    while len(result)>0:
-        print(result.pop().data)
+    results=[]
+    stack_nodes=[]
+    pre_node=None
+    while True:
+        if node is None:
+            if len(stack_nodes)==0:
+                break
+            else:
+                node=stack_nodes.pop()
+                if node.right is None or pre_node==node.right:#右孩子为空代表叶结点，pre_node==node.right代表父结点
+                    results.append(node.data)
+                    pre_node=node
+                    node=None
+                else:
+                    stack_nodes.append(node)#右孩子不为空，继续将root压栈
+                    node=node.right
+        else:
+            stack_nodes.append(node)
+            node=node.left
+    for result in results:
+        print(result)
     return
 # In[]
 """
